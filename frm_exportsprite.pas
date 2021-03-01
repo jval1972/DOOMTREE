@@ -573,7 +573,7 @@ begin
           wad.AddFile(PrefixEdit.Text, 'vxtmp');
           DeleteFile('vxtmp');
           wad.AddSeparator('VX_END');
-          wad.AddString('VOXELDEF', PrefixEdit.Text + '="' + PrefixEdit.Text + '.vox"{'#13#10'}');
+//          wad.AddString('VOXELDEF', PrefixEdit.Text + '="' + PrefixEdit.Text + '.vox"{'#13#10'}');
         end;
 
         FreeMem(vox, SizeOf(voxelbuffer_t));
