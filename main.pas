@@ -1401,6 +1401,10 @@ var
   sz: integer;
   twigtex, trunktex: TBitmap;
   f: TExportVoxelForm;
+  fs: TFileStream;
+  custompal: array[0..767] of byte;
+  i: integer;
+  palpath: string;
 begin
   GetMem(buf, SizeOf(voxelbuffer_t));
   Screen.Cursor := crHourglass;
@@ -1431,8 +1435,22 @@ begin
           1: VXE_ExportVoxelToSlab6VOX(buf, sz, @HereticPaletteRaw, ename);
           2: VXE_ExportVoxelToSlab6VOX(buf, sz, @HexenPaletteRaw, ename);
           3: VXE_ExportVoxelToSlab6VOX(buf, sz, @StrifePaletteRaw, ename);
+          4: VXE_ExportVoxelToSlab6VOX(buf, sz, @RadixPaletteRaw, ename);
           else
-            VXE_ExportVoxelToSlab6VOX(buf, sz, @RadixPaletteRaw, ename);
+            for i := 0 to 767 do
+              custompal[i] := DoomPaletteRaw[i];
+            palpath := Trim(f.PaletteNameEdit.Text);
+            if palpath <> '' then
+              if FileExists(palpath) then
+              begin
+                fs := TFileStream.Create(palpath, fmOpenRead);
+                try
+                  fs.Read(custompal, 768);
+                finally
+                  fs.Free;
+                end;
+              end;
+            VXE_ExportVoxelToSlab6VOX(buf, sz, @custompal, ename);
           end;
         end
         else

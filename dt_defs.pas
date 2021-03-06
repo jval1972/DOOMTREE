@@ -43,6 +43,7 @@ var
   opt_filemenuhistory7: bigstring_t;
   opt_filemenuhistory8: bigstring_t;
   opt_filemenuhistory9: bigstring_t;
+  opt_customvoxelpalette: bigstring_t;
   opt_viewdist: integer = 60000;
   opt_theta1: integer = 31416;
   opt_theta2: integer = 3926;
@@ -72,7 +73,7 @@ type
   end;
 
 const
-  NUMSETTINGS = 26;
+  NUMSETTINGS = 27;
 
 var
   Settings: array[0..NUMSETTINGS - 1] of TSettingItem = (
@@ -205,6 +206,11 @@ var
       desc: 'VOXELPALETTE';
       typeof: tstInteger;
       location: @opt_voxpal;
+    ),
+    (
+      desc: 'CUSTOMVOXELPALETTE';
+      typeof: tstBigString;
+      location: @opt_customvoxelpalette;
     )
   );
 

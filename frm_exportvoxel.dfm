@@ -3,7 +3,7 @@ object ExportVoxelForm: TExportVoxelForm
   Top = 145
   BorderStyle = bsDialog
   Caption = 'Export Voxel'
-  ClientHeight = 476
+  ClientHeight = 515
   ClientWidth = 524
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -12853,7 +12853,7 @@ object ExportVoxelForm: TExportVoxelForm
   TextHeight = 13
   object BottomPanel: TPanel
     Left = 0
-    Top = 435
+    Top = 474
     Width = 524
     Height = 41
     Align = alBottom
@@ -12895,13 +12895,13 @@ object ExportVoxelForm: TExportVoxelForm
     Left = 0
     Top = 0
     Width = 524
-    Height = 435
+    Height = 474
     Align = alClient
     Caption = ' '
     TabOrder = 1
     object PreviewGroupBox: TGroupBox
       Left = 184
-      Top = 64
+      Top = 112
       Width = 305
       Height = 345
       Caption = ' Preview '
@@ -14052,7 +14052,7 @@ object ExportVoxelForm: TExportVoxelForm
     end
     object SizeRadioGroup: TRadioGroup
       Left = 24
-      Top = 64
+      Top = 112
       Width = 105
       Height = 145
       Caption = ' Size '
@@ -14067,7 +14067,7 @@ object ExportVoxelForm: TExportVoxelForm
     end
     object PatchRadioGroup: TRadioGroup
       Left = 24
-      Top = 224
+      Top = 272
       Width = 105
       Height = 185
       Caption = ' Palette '
@@ -14077,16 +14077,62 @@ object ExportVoxelForm: TExportVoxelForm
         'Heretic'
         'Hexen'
         'Strife'
-        'Radix')
+        'Radix'
+        'Custom')
       TabOrder = 3
       Visible = False
+      OnClick = PatchRadioGroupClick
+    end
+    object PalettePanel: TPanel
+      Left = 1
+      Top = 42
+      Width = 522
+      Height = 41
+      Align = alTop
+      Caption = ' '
+      TabOrder = 4
+      TabStop = True
+      object Label1: TLabel
+        Left = 16
+        Top = 12
+        Width = 39
+        Height = 13
+        Caption = 'Palette: '
+        FocusControl = PaletteNameEdit
+      end
+      object SelectPaletteButton: TSpeedButton
+        Left = 472
+        Top = 11
+        Width = 23
+        Height = 22
+        Hint = 'Select DOOM palette from disk'
+        Caption = '...'
+        Flat = True
+        ParentShowHint = False
+        ShowHint = True
+        OnClick = SelectPaletteButtonClick
+      end
+      object PaletteNameEdit: TEdit
+        Left = 56
+        Top = 12
+        Width = 417
+        Height = 21
+        TabOrder = 0
+        OnChange = FileNameEditChange
+      end
     end
   end
   object SaveVoxelDialog: TSaveDialog
     DefaultExt = 'ddvox'
     Filter = 'DelphiDOOM Voxel (*.ddvox)|*.ddvox|Slab6 voxel (*.vox)|*.vox'
     Options = [ofOverwritePrompt, ofHideReadOnly, ofPathMustExist, ofEnableSizing]
-    Left = 433
-    Top = 48
+    Left = 441
+    Top = 16
+  end
+  object OpenPaletteDialog: TOpenDialog
+    Filter = 'Palette Files (*.pal)|*.pal|All Files (*.*)|*.*'
+    Options = [ofHideReadOnly, ofPathMustExist, ofFileMustExist, ofEnableSizing]
+    Left = 441
+    Top = 50
   end
 end

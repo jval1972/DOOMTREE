@@ -42,6 +42,11 @@ type
     rightSpeedButton: TSpeedButton;
     topSpeedButton: TSpeedButton;
     bottomSpeedButton: TSpeedButton;
+    PalettePanel: TPanel;
+    Label1: TLabel;
+    SelectPaletteButton: TSpeedButton;
+    PaletteNameEdit: TEdit;
+    OpenPaletteDialog: TOpenDialog;
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure FileNameEditChange(Sender: TObject);
@@ -49,6 +54,8 @@ type
     procedure SizeRadioGroupClick(Sender: TObject);
     procedure SpeedButtonClick(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
+    procedure PatchRadioGroupClick(Sender: TObject);
+    procedure SelectPaletteButtonClick(Sender: TObject);
   private
     { Private declarations }
   protected
@@ -106,10 +113,13 @@ begin
   else
     SizeRadioGroup.ItemIndex := 3;
 
-  if opt_voxpal in [0..4] then
+  if opt_voxpal in [0..5] then
     PatchRadioGroup.ItemIndex := opt_voxpal
   else
     PatchRadioGroup.ItemIndex := 0;
+
+  PalettePanel.Visible := (PatchRadioGroup.ItemIndex = 5) and (PatchRadioGroup.Visible);
+  PaletteNameEdit.Text := bigstringtostring(@opt_customvoxelpalette);
 end;
 
 procedure TExportVoxelForm.SetTreeVoxelParams(const atree: tree_t; const avox: voxelbuffer_p;
@@ -241,6 +251,7 @@ begin
     uExt := UpperCase(ExtractFileExt(uName));
     e := (uExt = '.DDVOX') or (uExt = '.VOX');
     PatchRadioGroup.Visible := uExt = '.VOX';
+    PalettePanel.Visible := (PatchRadioGroup.ItemIndex = 5) and (PatchRadioGroup.Visible);
   end;
   OKButton1.Enabled := e;
 end;
@@ -269,6 +280,18 @@ procedure TExportVoxelForm.FormDestroy(Sender: TObject);
 begin
   opt_voxsize := voxsize;
   opt_voxpal := PatchRadioGroup.ItemIndex;
+  stringtobigstring(PaletteNameEdit.Text, @opt_customvoxelpalette);
+end;
+
+procedure TExportVoxelForm.PatchRadioGroupClick(Sender: TObject);
+begin
+  PalettePanel.Visible := PatchRadioGroup.ItemIndex = 5;
+end;
+
+procedure TExportVoxelForm.SelectPaletteButtonClick(Sender: TObject);
+begin
+  if OpenPaletteDialog.Execute then
+    PaletteNameEdit.Text := OpenPaletteDialog.FileName;
 end;
 
 end.
