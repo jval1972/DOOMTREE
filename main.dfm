@@ -13592,7 +13592,7 @@ object Form1: TForm1
       Top = 2
       Width = 34
       Height = 34
-      Hint = 'About Procedural Tree Generator'
+      Hint = 'About DOOMTREE'
       Flat = True
       Glyph.Data = {
         360C0000424D360C000000000000360000002800000020000000200000000100
