@@ -696,7 +696,7 @@ begin
     glDeleteTextures(1, @twigtexture);
     twigtexture := gld_CreateTexture(TwigImage.Picture, True);
   end;
-  
+
   TreeToControls;
   filemenuhistory.AddPath(fname);
   SetFileName(fname);
