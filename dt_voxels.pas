@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 //
 //  DOOMTREE: Doom Tree Sprite Generator
-//  Copyright (C)2021-2022 by Jim Valavanis
+//  Copyright (C) 2021-2022 by Jim Valavanis
 //
 // DESCRIPTION:
 //  Voxel stuff
